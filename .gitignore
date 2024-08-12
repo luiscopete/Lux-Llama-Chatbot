@@ -1,0 +1,12 @@
+secrets.toml
+pyproject.toml
+poetry.lock
+.env
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.pyzw
+.DS_Store
