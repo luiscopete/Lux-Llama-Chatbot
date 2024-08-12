@@ -13,6 +13,7 @@ State: Development
 import streamlit as st
 import replicate
 import os
+from streamlit_app.utils import generate_response
 
 #Stramlit configuration
 st.set_page_config(
@@ -74,30 +75,7 @@ def main():
         st.session_state.messages = [{'role': 'assistant', 'content': 'Hello! How can I help you today?'}]
     st.sidebar.button('Clear chat history', on_click=clear_chat_history)
 
-
-    def generate_response(prompt_input):
-        string_dialogue = "You are a helpful assistant. You do not respond as 'User' or pretend to be 'User'. You only respond once as 'Assistant'."
-        for dict_message in st.session_state.messages:
-            if dict_message["role"] == "user":
-                string_dialogue += "User: " + dict_message["content"] + "\n\n"
-            else:
-                string_dialogue += "Assistant: " + dict_message["content"] + "\n\n"
-
-        output = replicate.run(
-            #'meta/meta-llama-3.1-405b-instruct',
-            f'meta/{model.lower()}',
-            input={
-                "prompt": f"{string_dialogue} {prompt_input} Assistant: ",
-                "temperature": temperature, 
-                "top_p": top_p, 
-                "max_tokens": max_tokens, 
-                "presence_penalty": presence_penalty,
-                "repetition_penalty": 1.0,
-            },
-            stream=True
-        )
-        return output
-
+    # Chat input
     if prompt := st.chat_input(disabled=not replicate_api):
         st.session_state.messages.append({'role': 'user', 'content': prompt})
         with st.chat_message('user'):
@@ -107,7 +85,7 @@ def main():
     if st.session_state.messages[-1]["role"] != "assistant":
         with st.chat_message("assistant"):
             with st.spinner("Generating answer..."):
-                response_iterator = generate_response(prompt)
+                response_iterator = generate_response(prompt, model, temperature, top_p, max_tokens, presence_penalty)
                 placeholder = st.empty()
                 full_response = ''
                 for item in response_iterator:
