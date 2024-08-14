@@ -69,21 +69,21 @@ def main():
         #API Validation
         st.title('Lux Assistant Settings 🛠️')
         st.image('images/Banner2.jpg')
-#        model = st.selectbox('Select model', ['Meta-Llama-3-70b-instruct', 'Meta-Llama-3.1-405b-instruct'])
-#           
-#        #   #################### Secret settings for API token #############
-#        if 'REPLICATE_API_TOKEN' in st.secrets:
-#            st.success('API token loaded')
-#            replicate_api = st.secrets['REPLICATE_API_TOKEN']
-#           
-#        #   # Enter API token
-#        else:
-#            replicate_api = st.text_input('Enter API token', type='password')
-#            if not (replicate.api_token.startswith('r8_') and len(replicate.api_token) == 40):
-#                st.warning('Invalid API token', icon='🔑')
-#            else:
-#                st.success('Proceed to enter your prompt', icon='✍️')
-#        os.environ['REPLICATE_API_TOKEN'] = replicate_api
+        #model = st.selectbox('Select model', ['Meta-Llama-3-70b-instruct', 'Meta-Llama-3.1-405b-instruct'])
+           
+        #   #################### Secret settings for API token #############
+        if 'REPLICATE_API_TOKEN' in st.secrets:
+            st.success('API token loaded')
+            replicate_api = st.secrets['REPLICATE_API_TOKEN']
+           
+        #   # Enter API token
+        else:
+            replicate_api = st.text_input('Enter API token', type='password')
+            if not (replicate.api_token.startswith('r8_') and len(replicate.api_token) == 40):
+                st.warning('Invalid API token', icon='🔑')
+            else:
+                st.success('Proceed to enter your prompt', icon='✍️')
+        os.environ['REPLICATE_API_TOKEN'] = replicate_api
 
         #Model settings
         
