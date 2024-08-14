@@ -20,7 +20,7 @@ user_icon = 'images/user2.png'
 
 #Stramlit configuration
 st.set_page_config(
-    page_title="Lux Assistant",
+    page_title="Lux Chat",
     page_icon=assistant_icon,
     layout="wide",
     initial_sidebar_state="collapsed",)
