@@ -12,7 +12,7 @@ def generate_response(prompt_input, model, temperature, top_p, max_tokens, prese
 
     output = replicate.run(
         #'meta/meta-llama-3.1-405b-instruct',
-        f'meta/{model.lower()}',
+        f'{model.lower()}',
         input={
             "prompt": f"{string_dialogue} {prompt_input} Assistant: ",
             "temperature": temperature, 
