@@ -15,10 +15,13 @@ import replicate
 import os
 from streamlit_app.utils import generate_response
 
+assistant_icon = 'images/bot.png'
+user_icon = 'images/user2.png'
+
 #Stramlit configuration
 st.set_page_config(
     page_title="Lux Assistant",
-    page_icon="🤖",
+    page_icon=assistant_icon,
     layout="wide",
     initial_sidebar_state="collapsed",)
 
@@ -103,8 +106,6 @@ def main():
             'content': "Hello! I'm Lux, your personal AI assistant. How can I help you today?"
             }]
 
-    assistant_icon = 'images/bot.png'
-    user_icon = 'images/user2.png'
     #display chat messages
     for message in st.session_state.messages:
         with st.chat_message(message['role'], avatar=assistant_icon):
