@@ -47,8 +47,10 @@ gradient_text_html = """
 """
 
 model_options = {
-    'Llama 3.1 70b': 'Meta-Llama-3-70b-instruct',
-    'Llama 3.1 405b': 'Meta-Llama-3.1-405b-instruct'
+    'Llama 3.1 70b Instruct': 'meta/Meta-Llama-3-70b-instruct',
+    'Llama 3.1 405b Instruct': 'meta/Meta-Llama-3.1-405b-instruct',
+    'Mixtral 8x7b Instruct': 'mistralai/mixtral-8x7b-instruct-v0.1',
+    'Gemma 7b': 'google-deepmind/gemma-7b-it',
 }
 
 
