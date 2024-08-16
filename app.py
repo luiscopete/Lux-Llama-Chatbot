@@ -14,6 +14,7 @@ import streamlit as st
 import replicate
 import os
 from streamlit_app.utils import generate_response
+from  streamlit_app.utils import generate_gradient_html
 
 assistant_icon = 'images/bot.png'
 user_icon = 'images/user2.png'
@@ -31,32 +32,30 @@ replicate_api = st.secrets['REPLICATE_API_TOKEN']
 #replicate_api = 'test'
 
 
-gradient_text_html = """
-<style>
-.gradient-text {
-    font-weight: bold;
-    background: -webkit-linear-gradient(left, #68B7BA, #00BFFF); /* Degradado de azul */
-    background: linear-gradient(to right, #1E90FF, #00BFFF);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline;
-    font-size: 3em;
-}
-</style>
-<div class="gradient-text">LuxChat</div>
-"""
+title_html = generate_gradient_html('LuxChat', 3, '#68B7BA', '#00BFFF')
 
 model_options = {
     'Llama 3.1 70b Instruct': 'meta/Meta-Llama-3-70b-instruct',
     'Llama 3.1 405b Instruct': 'meta/Meta-Llama-3.1-405b-instruct',
     'Mixtral 8x7b Instruct': 'mistralai/mixtral-8x7b-instruct-v0.1',
-    'Gemma 7b': 'google-deepmind/gemma-7b-it',
+    'Flan T5 XL': 'replicate/flan-t5-xl:7a216605843d87f5426a10d2cc6940485a232336ed04d655ef86b91e020e9210',
 }
 
+sentiment_options = {
+    'Neutral': 'neutral',
+    'Happy': 'happy',
+    'Sad': 'sad',
+    'Angry': 'angry',
+    'Surprised': 'surprised',
+    'Disgusted': 'disgusted',
+    'Fearful': 'fearful',
+    'Excited': 'excited',
+    'Sarcastic': 'sarcastic',
+}
 
 def main():
     #Set title
-    st.markdown(gradient_text_html, unsafe_allow_html=True)
+    st.markdown(title_html, unsafe_allow_html=True)
     st.markdown("<p style='font-size: 20px; color: gray;'>By Luis Copete</p>", unsafe_allow_html=True)
     #st.caption('By Luis Copete')
     #st.title("""Lux Assistant - by Luis Copete 💬""")
@@ -93,6 +92,7 @@ def main():
         #Model settings
         
         st.subheader('Model settings')
+        sentiment = st.selectbox('Sentiment', list(sentiment_options.keys()), index=0)
         temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=9.9, value=0.7, step=0.01)
         top_p = st.sidebar.slider('top_p', min_value=0.01, max_value=0.9, value=1.0, step=0.01)
         presence_penalty = st.sidebar.slider('presence_penalty', min_value=0.01, max_value=2.0, value=1.15, step=0.01)
@@ -135,7 +135,8 @@ def main():
                     temperature, 
                     top_p, 
                     max_tokens, 
-                    presence_penalty)
+                    presence_penalty,
+                    sentiment=sentiment)
                 placeholder = st.empty()
                 full_response = ''
                 for item in response_iterator:
