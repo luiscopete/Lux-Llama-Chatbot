@@ -1,2 +1,3 @@
-replicate
-streamlit==1.32.0
+replicate==0.31.0
+streamlit==1.30.0
+streamlit_mic_recorder==0.0.8

@@ -15,9 +15,13 @@ import replicate
 import os
 from streamlit_app.utils import generate_response
 from  streamlit_app.utils import generate_gradient_html
+from streamlit_app.utils import prompt_audio
 
+
+###### Icons
 assistant_icon = 'images/bot.png'
 user_icon = 'images/user2.png'
+microphone_icon = 'images/microphone.png'
 
 #Stramlit configuration
 st.set_page_config(
@@ -67,7 +71,8 @@ def main():
         horizontal=True)
     model = model_options[model]
     
-
+    #Speech to text
+    speech = prompt_audio(language='ES')
 
     with st.sidebar:
         #API Validation
@@ -90,9 +95,11 @@ def main():
         os.environ['REPLICATE_API_TOKEN'] = replicate_api
 
         #Model settings
-        
+
         st.subheader('Model settings')
         sentiment = st.selectbox('Sentiment', list(sentiment_options.keys()), index=0)
+        country = st.selectbox('Country', ['Mexico', 'Spain', 'Argentina', 'Colombia', 'Peru'])
+        language = st.selectbox('Language', ['Spanish', 'English', 'French', 'German', 'Italian', 'Portuguese'])
         temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=9.9, value=0.7, step=0.01)
         top_p = st.sidebar.slider('top_p', min_value=0.01, max_value=0.9, value=1.0, step=0.01)
         presence_penalty = st.sidebar.slider('presence_penalty', min_value=0.01, max_value=2.0, value=1.15, step=0.01)
@@ -120,7 +127,18 @@ def main():
     st.sidebar.button('Clear chat history', on_click=clear_chat_history)
 
     # Chat input
+    
+    #use microphone
+    if speech and speech != st.session_state.messages[-1]["content"]:
+        prompt = speech
+        st.session_state.messages.append({'role': 'user', 'content': prompt})
+        with st.chat_message('user', avatar=user_icon):
+            st.write(prompt)
+        #delete text from session
+        st.session_state.messages.pop(-2)
+      
     if prompt := st.chat_input(disabled=not replicate_api):
+        speech = None
         st.session_state.messages.append({'role': 'user', 'content': prompt})
         with st.chat_message('user', avatar=user_icon):
             st.write(prompt)
@@ -136,7 +154,9 @@ def main():
                     top_p, 
                     max_tokens, 
                     presence_penalty,
-                    sentiment=sentiment)
+                    sentiment=sentiment,
+                    country=country,
+                    language=language,)
                 placeholder = st.empty()
                 full_response = ''
                 for item in response_iterator:
