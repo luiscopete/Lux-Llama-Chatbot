@@ -65,29 +65,31 @@ def generate_response(
     )
     return output
 
-def generate_gradient_html(text, size, left_color, right_color):
+def generate_gradient_html(text, size, left_color, right_color, class_name):
     ''' Generate HTML with gradient text '''
     html = f"""
     <style>
-    .gradient-text {{
+    .{class_name} {{
         font-weight: bold;
-        background: -webkit-linear-gradient(left, #{left_color}, #{right_color}); /* Degradado de azul */
-        background: linear-gradient(to right, #1E90FF, #00BFFF);
+        background: -webkit-linear-gradient(left, {left_color}, {right_color});
+        background: linear-gradient(to right, {left_color}, {right_color});
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         display: inline;
-        font-size: {size}em;
+        font-size: {size}em; /* Tamaño ajustable */
     }}
     </style>
-    <div class="gradient-text">{text}</div>
+    <div class="{class_name}">{text}</div>
     """
     return html
+
+
 
 def prompt_audio(language):
     ''' Prompt audio recording '''
     speech = speech_to_text(
         language=language,
-        start_prompt='Start recording',
+        start_prompt='Record voice 🎙️',
         stop_prompt='Stop recording',
         just_once=False,
         use_container_width=False,

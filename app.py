@@ -6,7 +6,7 @@ Author: Luis Copete
 Created: August 2024
 Status: Development
 Python version: 3.8.18
-Version: 0.1
+Version: 0.3
 State: Development
 """
 
@@ -23,20 +23,25 @@ assistant_icon = 'images/bot.png'
 user_icon = 'images/user2.png'
 microphone_icon = 'images/microphone.png'
 
-#Stramlit configuration
+######### Stramlit configuration #########
 st.set_page_config(
     page_title="Lux Chat",
     page_icon=assistant_icon,
     layout="wide",
-    initial_sidebar_state="collapsed",)
+    initial_sidebar_state="expanded",)
 
 # Replicate API token
 #os.environ['REPLICATE_API_TOKEN'] = st.secrets["REPLICATE_API_TOKEN"]
 replicate_api = st.secrets['REPLICATE_API_TOKEN']
 #replicate_api = 'test'
 
+################ Texts ###################
+title_html = generate_gradient_html('LuxChat', 5, '#68B7BA', '#00BFFF', 'title-class')
+about_subtitle = generate_gradient_html('About', 2, '#68B7BA', '#00BFFF', 'about-class')
 
-title_html = generate_gradient_html('LuxChat', 3, '#68B7BA', '#00BFFF')
+with open ('streamlit_app/description.txt', 'r') as file:
+    description_text = file.read()
+
 
 model_options = {
     'Llama 3.1 70b Instruct': 'meta/Meta-Llama-3-70b-instruct',
@@ -76,8 +81,10 @@ def main():
 
     with st.sidebar:
         #API Validation
-        st.title('Lux Assistant Settings 🛠️')
+        #st.title('LuxChat Settings 🛠️')
         st.image('images/Banner2.jpg')
+        st.markdown(about_subtitle, unsafe_allow_html=True)
+        st.markdown(description_text, unsafe_allow_html=True)
         #model = st.selectbox('Select model', ['Meta-Llama-3-70b-instruct', 'Meta-Llama-3.1-405b-instruct'])
            
         #   #################### Secret settings for API token #############
@@ -96,10 +103,11 @@ def main():
 
         #Model settings
 
-        st.subheader('Model settings')
+        st.subheader('Chat settings')
         sentiment = st.selectbox('Sentiment', list(sentiment_options.keys()), index=0)
-        country = st.selectbox('Country', ['Mexico', 'Spain', 'Argentina', 'Colombia', 'Peru'])
+        country = st.selectbox('Country', ['Colombia', 'Mexico', 'Argentina', 'Spain', 'Brasil'])
         language = st.selectbox('Language', ['Spanish', 'English', 'French', 'German', 'Italian', 'Portuguese'])
+        st.markdown('---')
         temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=9.9, value=0.7, step=0.01)
         top_p = st.sidebar.slider('top_p', min_value=0.01, max_value=0.9, value=1.0, step=0.01)
         presence_penalty = st.sidebar.slider('presence_penalty', min_value=0.01, max_value=2.0, value=1.15, step=0.01)

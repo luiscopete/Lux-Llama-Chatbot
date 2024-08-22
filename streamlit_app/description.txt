@@ -1,0 +1,4 @@
+<p style="text-align: justify; font-size: 14px;">
+Lux is an advanced chatbot application developed using Streamlit. This AI assistant is designed to interact with users in a conversational manner, providing intelligent responses based on various LLM models, including Llama, and Flan. Lux is capable of understanding and responding in multiple languages.
+Key features include sentiment adjustment, allowing the assistant to tailor its tone and country-specific settings to better align responses with regional contexts. The chatbot supports both text and speech input, enhancing user interaction through voice commands.
+</p>

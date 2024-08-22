@@ -11,6 +11,7 @@ COPY app.py ./
 COPY streamlit_app/ ./streamlit_app/
 COPY images/ ./images/
 COPY tests/ ./tests/
+COPY .streamlit/ /app/.streamlit/
 
 # Install Poetry
 RUN pip install poetry
