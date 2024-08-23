@@ -103,11 +103,13 @@ def main():
 
         #Model settings
 
-        st.subheader('Chat settings')
+        #st.subheader('Chat settings')
+        st.markdown(generate_gradient_html('Language settings', 1.5, '#68B7BA', '#00BFFF', 'voice-class'), unsafe_allow_html=True)
         sentiment = st.selectbox('Sentiment', list(sentiment_options.keys()), index=0)
         country = st.selectbox('Country', ['Colombia', 'Mexico', 'Argentina', 'Spain', 'Brasil'])
         language = st.selectbox('Language', ['Spanish', 'English', 'French', 'German', 'Italian', 'Portuguese'])
         st.markdown('---')
+        st.markdown(generate_gradient_html('Model settings', 1.5, '#68B7BA', '#00BFFF', 'voice-class'), unsafe_allow_html=True)
         temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=9.9, value=0.7, step=0.01)
         top_p = st.sidebar.slider('top_p', min_value=0.01, max_value=0.9, value=1.0, step=0.01)
         presence_penalty = st.sidebar.slider('presence_penalty', min_value=0.01, max_value=2.0, value=1.15, step=0.01)
