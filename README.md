@@ -138,25 +138,25 @@ I welcome contributions to the Lux Chatbot project! Whether you want to fix a bu
    git clone https://github.com/luiscopete/Lux-Llama-Chatbot.git
 
 
-3. Create a New Branch:
+3. **Create a New Branch:**
 
     Before making any changes, create a new branch for your work:
 
     ``` bash
     git checkout -b feature-or-bugfix-name
 
-4. Make Your Changes:
+4. **Make Your Changes:**
 
     Implement your changes in the new branch. This could involve updating code, adding new features, fixing bugs, or improving documentation.
 
-5. Run Tests:
+5. **Run Tests:**
 
     If your changes involve code, make sure to run existing tests and add new tests if needed. This ensures that your changes do not break any existing functionality.
 
     ```bash
     pytest tests/
 
-6. Commit Your Changes:
+6. **Commit Your Changes:**
 
     After making your changes, commit them with a descriptive message:
 
@@ -164,22 +164,22 @@ I welcome contributions to the Lux Chatbot project! Whether you want to fix a bu
     git add .
     git commit -m "Description of your changes"
 
-7. Push Your Branch:
+7. **Push Your Branch:**
 
     Push your branch to your forked repository:
 
     ``` bash
     git push origin feature-or-bugfix-name
 
-8. Submit a Pull Request:
+8. **Submit a Pull Request:**
 
     Go to the original Lux Chatbot repository and click on "New Pull Request." Select your branch and describe your changes in detail. If your pull request addresses a specific issue, please reference it in the description.
 
-9. Code Review:
+9. **Code Review:**
 
     Once your pull request is submitted, it will be reviewed by me. They may ask for some changes or provide feedback. Please address any comments and update your pull request as necessary.
 
-10. Merge:
+10. **Merge:**
 
     After your pull request is approved, it will be merged into the main branch. Congratulations, and thank you for contributing!
 

@@ -13,7 +13,7 @@ language_options = {
     'Portuguese': 'PT',
 }
 
-def get_prompt_systems(language):
+def get_prompt_systems(language: str):
     ''' Get prompt systems from dialogues.txt '''
     with open('./streamlit_app/dialogues.txt', 'r') as file:
         text = file.read()
@@ -27,15 +27,15 @@ def get_prompt_systems(language):
     raise ValueError('Language not found in dialogues.txt')
 
 def generate_response(
-    prompt_input,
-    model,
-    temperature,
-    top_p,
-    max_tokens,
-    presence_penalty,
-    country,
-    language,
-    sentiment="friendly",
+    prompt_input: str,
+    model: str,
+    temperature: float,
+    top_p: float,
+    max_tokens: int,
+    presence_penalty: float,
+    country: str,
+    language: str,
+    sentiment: str = "neutral",
 ):
     """Generate response from LLM model"""
 
@@ -65,7 +65,7 @@ def generate_response(
     )
     return output
 
-def generate_gradient_html(text, size, left_color, right_color, class_name):
+def generate_gradient_html(text: str, size: str, left_color: str, right_color: str, class_name: str):
     ''' Generate HTML with gradient text '''
     html = f"""
     <style>
@@ -85,7 +85,7 @@ def generate_gradient_html(text, size, left_color, right_color, class_name):
 
 
 
-def prompt_audio(language):
+def prompt_audio(language: str):
     ''' Prompt audio recording '''
     speech = speech_to_text(
         language=language,
