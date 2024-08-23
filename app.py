@@ -94,11 +94,14 @@ def main():
            
         #   # Enter API token
         else:
-            replicate_api = st.text_input('Enter API token', type='password')
-            if not (replicate.api_token.startswith('r8_') and len(replicate.api_token) == 40):
-                st.warning('Invalid API token', icon='🔑')
+            if os.getenv('REPLICATE_API_TOKEN'):
+                replicate_api = os.getenv('REPLICATE_API_TOKEN')
             else:
-                st.success('Proceed to enter your prompt', icon='✍️')
+                replicate_api = st.text_input('Enter API token', type='password')
+                if not (replicate.api_token.startswith('r8_') and len(replicate.api_token) == 40):
+                    st.warning('Invalid API token', icon='🔑')
+                else:
+                    st.success('Proceed to enter your prompt', icon='✍️')
         os.environ['REPLICATE_API_TOKEN'] = replicate_api
 
         #Model settings
