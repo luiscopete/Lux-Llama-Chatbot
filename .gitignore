@@ -1,6 +1,6 @@
 secrets.toml
-pyproject.toml
-poetry.lock
+#pyproject.toml
+#poetry.lock
 .env
 __pycache__
 *.pyc
