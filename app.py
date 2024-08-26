@@ -116,7 +116,7 @@ def main():
         temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=9.9, value=0.7, step=0.01)
         top_p = st.sidebar.slider('top_p', min_value=0.01, max_value=0.9, value=1.0, step=0.01)
         presence_penalty = st.sidebar.slider('presence_penalty', min_value=0.01, max_value=2.0, value=1.15, step=0.01)
-        max_tokens = st.sidebar.slider('max_tokens', min_value=0, max_value=1000, value=300, step=1)
+        max_tokens = st.sidebar.slider('max_tokens', min_value=0, max_value=2000, value=600, step=1)
         #min_tokens = st.sidebar.slider('min_tokens', min_value=0, max_value=, value=0, step=1)
         system_prompt = 'You are a helpful assistant\n\nUser:'
         prompt_template = 'system\n\nYou are a helpful assistant\n\n{prompt}assistant\n\n'
